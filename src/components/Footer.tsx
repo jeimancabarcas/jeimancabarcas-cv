@@ -25,9 +25,6 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Brand & Bio */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-[#3525cd] text-white flex items-center justify-center font-serif text-sm font-bold shadow-sm">
-                {PROFILE_INFO.name.charAt(0)}
-              </div>
               <span className="font-serif text-xl font-bold tracking-tight text-[#191c1d]">
                 {PROFILE_INFO.brandName}
               </span>
@@ -134,7 +131,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Bottom copyright line */}
         <div className="pt-6 border-t border-black/5 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#545f73]">
           <div>
-            © {new Date().getFullYear()} {PROFILE_INFO.brandName} • {PROFILE_INFO.name}. All rights reserved.
+            © {new Date().getFullYear()} {PROFILE_INFO.name}. All rights reserved.
           </div>
           <button
             onClick={scrollToTop}

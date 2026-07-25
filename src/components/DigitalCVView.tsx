@@ -221,7 +221,7 @@ export const DigitalCVView: React.FC<DigitalCVViewProps> = ({
           <div className="w-16 h-16 rounded-full overflow-hidden mx-auto border-2 border-[#3525cd] shadow-md">
             <img
               src={PROFILE_INFO.avatarUrl}
-              alt="Alex Rivers Avatar"
+              alt={`${PROFILE_INFO.name} Avatar`}
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover"
             />

@@ -127,17 +127,17 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
           <div className="mt-8 pt-6 border-t border-black/5 flex flex-wrap items-center justify-between gap-4 text-xs">
             <div className="flex flex-wrap items-center gap-2">
               <span className="px-3 py-1 rounded-full bg-[#3525cd]/10 text-[#3525cd] font-semibold">
-                Senior Technical Architect
+                AI & Senior Software Engineer
               </span>
               <span className="px-3 py-1 rounded-full bg-[#545f73]/10 text-[#545f73] font-semibold">
-                Creative Engineer
+                SDD Architect
               </span>
               <span className="px-3 py-1 rounded-full bg-[#7e3000]/10 text-[#7e3000] font-semibold">
-                Full-Stack Capability
+                Full-Stack Mastery
               </span>
             </div>
             <span className="text-[#545f73] font-mono text-[11px]">
-              LOCATION: LONDON • REMOTE-READY
+              LOCATION: CARTAGENA, COLOMBIA • REMOTE-READY
             </span>
           </div>
         </div>
@@ -303,7 +303,7 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
             "{PROFILE_INFO.techQuote}"
           </p>
           <span className="block mt-4 text-xs font-mono uppercase tracking-widest text-[#545f73]">
-            — Alex Rivers • Principal Architect
+            — Jeiman Cabarcas • Senior AI & Software Engineer
           </span>
         </div>
       </section>
@@ -327,21 +327,21 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
                 <span className="material-symbols-outlined">insights</span>
               </div>
               <h3 className="font-bold text-lg text-[#191c1d] mb-2">
-                Data-Driven Development
+                Spec-Driven & Clean Architecture
               </h3>
               <p className="text-sm text-[#545f73] leading-relaxed">
-                Utilizing analytics and user feedback loops to prioritize technical features that drive the highest business value and user satisfaction.
+                Utilizing SOLID principles, spec-driven development (SDD), and automated testing pipelines to ensure scalable, maintainable enterprise systems.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-black/5 flex items-center gap-6 text-xs text-[#545f73] font-mono">
               <div>
-                <span className="block text-lg font-bold text-[#3525cd] font-sans">99.9%</span>
-                <span>Crash-free rate</span>
+                <span className="block text-lg font-bold text-[#3525cd] font-sans">100%</span>
+                <span>SOLID Principles</span>
               </div>
               <div className="h-6 w-px bg-black/10" />
               <div>
-                <span className="block text-lg font-bold text-[#191c1d] font-sans">&lt;100ms</span>
-                <span>TTFB Response</span>
+                <span className="block text-lg font-bold text-[#191c1d] font-sans">99.9%</span>
+                <span>Uptime & Quality</span>
               </div>
             </div>
           </div>
@@ -353,13 +353,13 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
                 <span className="material-symbols-outlined">speed</span>
               </div>
               <span className="font-serif text-5xl font-bold tracking-tight block mb-1">
-                100
+                100%
               </span>
               <p className="text-xs uppercase tracking-widest text-white/80 font-mono font-semibold mb-3">
-                Lighthouse Best Practices
+                SDD Compliance
               </p>
               <p className="text-xs text-white/80 leading-relaxed">
-                Uncompromising standard for Core Web Vitals, accessibility, and zero-runtime bloat.
+                Uncompromising standard for clean code, token optimization, and zero architectural debt.
               </p>
             </div>
           </div>
@@ -371,35 +371,35 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
                 <span className="material-symbols-outlined">terminal</span>
               </div>
               <h3 className="font-bold text-base text-[#191c1d] mb-2">
-                CLI Tooling & Automation
+                Agentic AI & CLI Workflows
               </h3>
               <p className="text-xs text-[#545f73] leading-relaxed">
-                Automating internal workflows with custom scripts to save engineering teams hundreds of hours annually.
+                Integrating Copilot CLI, Claude Code, and OpenCode tools into high-velocity production pipelines.
               </p>
             </div>
             <div className="mt-4 text-[10px] font-mono bg-black/5 p-2 rounded text-[#545f73]">
-              $ npx aesthete-cli init --speed=max
+              $ npx jeiman-cli init --sdd=true
             </div>
           </div>
 
-          {/* Card 4: London Laboratory */}
+          {/* Card 4: Cartagena Workspace */}
           <div className="md:col-span-2 relative overflow-hidden rounded-2xl group min-h-[220px] shadow-sm">
             <img
               src={PROFILE_INFO.labImageUrl}
-              alt="London Laboratory Studio Workspace"
+              alt="Cartagena Engineering Workspace"
               referrerPolicy="no-referrer"
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 sm:p-8 flex flex-col justify-end text-white">
               <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-white/80 mb-1">
                 <MapPin className="w-3.5 h-3.5 text-sky-400" />
-                <span>London Studio • Global Thinking</span>
+                <span>Cartagena, Colombia • Global Reach</span>
               </div>
               <h3 className="font-serif text-xl sm:text-2xl font-bold mb-1">
-                Laboratory Workspace
+                Engineering Base
               </h3>
               <p className="text-xs text-white/80 max-w-lg">
-                Operating from a sun-drenched studio in London while collaborating with engineering teams across San Francisco, Tokyo, and Berlin.
+                Operating from Cartagena, Bolívar, Colombia while collaborating with global software teams and enterprise client products at Globant.
               </p>
             </div>
           </div>

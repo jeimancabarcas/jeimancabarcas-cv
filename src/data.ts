@@ -8,7 +8,7 @@ import {
 
 export const PROFILE_INFO = {
   name: 'Jeiman Cabarcas',
-  brandName: 'Jeiman.Dev',
+  brandName: 'Jeiman Cabarcas',
   tagline: 'AI & Senior Software Engineer.',
   subTagline: 'Combining clean architecture, spec-driven development, and cutting-edge AI Engineering.',
   roleTitle: 'SENIOR SOFTWARE ENGINEER | AI ENGINEER | SDD ARCHITECT',
