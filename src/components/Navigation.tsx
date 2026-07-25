@@ -20,8 +20,8 @@ export const Navigation: React.FC<NavigationProps> = ({
   const { lang, setLang, t } = useLanguage();
 
   return (
-    <div className="w-full">
-      {/* 1. TOP UTILITY BAR (Scrolls with page flow, hides on scroll) */}
+    <>
+      {/* 1. TOP UTILITY BAR (Scrolls away with page flow) */}
       <div className="w-full bg-white/60 backdrop-blur-md border-b border-black/5 py-1.5 px-3 sm:px-6 text-xs transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
           {/* Left: Location & Availability */}
@@ -86,16 +86,13 @@ export const Navigation: React.FC<NavigationProps> = ({
       </div>
 
       {/* 2. FLOATING STICKY MAIN NAVBAR WITH BORDERS */}
-      <header className="sticky top-3 z-50 px-3 sm:px-6 max-w-7xl mx-auto my-2.5 sm:my-3">
-        <div className="glass-card bg-white/90 backdrop-blur-xl rounded-2xl border border-black/10 shadow-md px-3.5 sm:px-6 py-2.5 sm:py-3 transition-all duration-300 flex items-center justify-between gap-3 overflow-hidden">
-          {/* Brand Logo / Name */}
+      <header className="sticky top-2 sm:top-3 z-50 px-3 sm:px-6 max-w-7xl mx-auto my-2 sm:my-3">
+        <div className="glass-card bg-white/95 backdrop-blur-xl rounded-2xl border border-black/10 shadow-md px-3.5 sm:px-6 py-2.5 sm:py-3 transition-all duration-300 flex items-center justify-between gap-3 overflow-hidden">
+          {/* Brand Name (Without JC initials circle) */}
           <button
             onClick={() => setActiveTab('expertise')}
             className="group flex items-center gap-2 text-left focus:outline-none shrink-0"
           >
-            <div className="w-8 h-8 rounded-full bg-[#3525cd] text-white flex items-center justify-center font-serif font-bold text-sm shadow-sm group-hover:scale-105 transition-transform">
-              JC
-            </div>
             <div>
               <span className="font-serif text-base sm:text-lg font-bold tracking-tight text-[#191c1d] group-hover:text-[#3525cd] transition-colors leading-none block">
                 {BASE_PROFILE.brandName}
@@ -146,6 +143,6 @@ export const Navigation: React.FC<NavigationProps> = ({
           </nav>
         </div>
       </header>
-    </div>
+    </>
   );
 };
