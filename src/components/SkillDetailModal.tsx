@@ -1,6 +1,7 @@
 import React from 'react';
 import { SkillCategory } from '../types';
-import { X, CheckCircle2, Code2, ArrowUpRight } from 'lucide-react';
+import { useLanguage } from '../LanguageContext';
+import { X, CheckCircle2, ArrowUpRight } from 'lucide-react';
 
 interface SkillDetailModalProps {
   skill: SkillCategory | null;
@@ -13,6 +14,8 @@ export const SkillDetailModal: React.FC<SkillDetailModalProps> = ({
   onClose,
   onNavigateToExperience,
 }) => {
+  const { t } = useLanguage();
+
   if (!skill) return null;
 
   return (
@@ -33,7 +36,7 @@ export const SkillDetailModal: React.FC<SkillDetailModalProps> = ({
           </div>
           <div>
             <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#3525cd]">
-              {skill.level} PROFICIENCY • {skill.percentage}%
+              {skill.level} • {skill.percentage}%
             </span>
             <h2 className="font-serif text-2xl font-bold text-[#191c1d]">
               {skill.title}
@@ -50,7 +53,7 @@ export const SkillDetailModal: React.FC<SkillDetailModalProps> = ({
         {/* Tag Pills */}
         <div>
           <h3 className="text-xs font-bold uppercase tracking-widest text-[#545f73] mb-2">
-            Frameworks & Technologies
+            {t('tagsLabel')}
           </h3>
           <div className="flex flex-wrap gap-2">
             {skill.tags.map((tag, idx) => (
@@ -67,7 +70,7 @@ export const SkillDetailModal: React.FC<SkillDetailModalProps> = ({
         {/* Key Projects */}
         <div>
           <h3 className="text-xs font-bold uppercase tracking-widest text-[#545f73] mb-2">
-            Representative Systems Built
+            {t('projectsLabel')}
           </h3>
           <ul className="space-y-2">
             {skill.keyProjects.map((proj, idx) => (
@@ -88,14 +91,14 @@ export const SkillDetailModal: React.FC<SkillDetailModalProps> = ({
             }}
             className="flex items-center gap-2 text-xs font-bold text-[#3525cd] hover:underline"
           >
-            <span>See Applied Experience</span>
+            <span>{t('viewExperienceBtn')}</span>
             <ArrowUpRight className="w-4 h-4" />
           </button>
           <button
             onClick={onClose}
             className="px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 text-xs font-medium text-[#191c1d]"
           >
-            Close
+            {t('closeBtn')}
           </button>
         </div>
       </div>

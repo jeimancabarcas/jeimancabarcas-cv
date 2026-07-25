@@ -1,6 +1,7 @@
 import React from 'react';
 import { ExperienceItem } from '../types';
-import { X, ExternalLink, BarChart3, CheckCircle2, Layers, Cpu, Server } from 'lucide-react';
+import { useLanguage } from '../LanguageContext';
+import { X, BarChart3, CheckCircle2, Cpu, Server } from 'lucide-react';
 
 interface CaseStudyModalProps {
   experience: ExperienceItem | null;
@@ -13,6 +14,8 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
   onClose,
   onOpenConnect,
 }) => {
+  const { t } = useLanguage();
+
   if (!experience) return null;
 
   return (
@@ -57,7 +60,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
         <div>
           <h3 className="text-xs font-bold uppercase tracking-widest text-[#545f73] mb-3 flex items-center gap-2">
             <BarChart3 className="w-4 h-4 text-emerald-600" />
-            <span>Quantifiable Impact & Metrics</span>
+            <span>{t('metricsTitle')}</span>
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {experience.metrics.map((metric, idx) => (
@@ -75,7 +78,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
         <div className="p-4 sm:p-5 rounded-2xl bg-[#f8f9fa] border border-black/5 space-y-2">
           <h3 className="text-xs font-bold uppercase tracking-widest text-[#3525cd] flex items-center gap-2">
             <Server className="w-4 h-4" />
-            <span>Architectural Strategy</span>
+            <span>{t('archTitle')}</span>
           </h3>
           <p className="text-xs sm:text-sm text-[#191c1d] font-mono leading-relaxed">
             {experience.architectureOverview}
@@ -86,7 +89,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
         <div>
           <h3 className="text-xs font-bold uppercase tracking-widest text-[#545f73] mb-3 flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-[#3525cd]" />
-            <span>Key Technical Accomplishments</span>
+            <span>{t('highlightsTitle')}</span>
           </h3>
           <ul className="space-y-3">
             {experience.highlights.map((item, idx) => (
@@ -102,7 +105,7 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
         <div>
           <h3 className="text-xs font-bold uppercase tracking-widest text-[#545f73] mb-3 flex items-center gap-2">
             <Cpu className="w-4 h-4 text-[#7e3000]" />
-            <span>Technologies & Libraries Used</span>
+            <span>{t('techStackLabel')}</span>
           </h3>
           <div className="flex flex-wrap gap-2">
             {experience.techStack.map((tech, idx) => (
@@ -125,13 +128,13 @@ export const CaseStudyModal: React.FC<CaseStudyModalProps> = ({
             }}
             className="px-6 py-2.5 rounded-full bg-[#3525cd] text-white text-xs font-semibold uppercase tracking-wider hover:bg-[#271ab1] transition-colors"
           >
-            Inquire About Similar Work
+            {t('scheduleBtn')}
           </button>
           <button
             onClick={onClose}
             className="px-5 py-2.5 rounded-full bg-black/5 hover:bg-black/10 text-[#191c1d] text-xs font-medium transition-colors"
           >
-            Close Case Study
+            {t('closeBtn')}
           </button>
         </div>
       </div>

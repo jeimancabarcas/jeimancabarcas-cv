@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
-import { X, Printer, Copy, Check, FileText, Download } from 'lucide-react';
-import { PROFILE_INFO, EXPERIENCES, EDUCATION_ITEMS, CERTIFICATION_ITEMS } from '../data';
+import { X, Printer, Copy, Check, FileText } from 'lucide-react';
+import {
+  getProfileInfo,
+  getExperiences,
+  getEducation,
+  getCertifications,
+  BASE_PROFILE,
+} from '../data';
+import { useLanguage } from '../LanguageContext';
 
 interface CVExportModalProps {
   isOpen: boolean;
@@ -8,9 +15,15 @@ interface CVExportModalProps {
 }
 
 export const CVExportModal: React.FC<CVExportModalProps> = ({ isOpen, onClose }) => {
+  const { lang, t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
   if (!isOpen) return null;
+
+  const profileInfo = getProfileInfo(lang);
+  const experiences = getExperiences(lang);
+  const educationItems = getEducation(lang);
+  const certificationItems = getCertifications(lang);
 
   const handlePrint = () => {
     window.print();
@@ -18,15 +31,15 @@ export const CVExportModal: React.FC<CVExportModalProps> = ({ isOpen, onClose })
 
   const handleCopyText = () => {
     const textCV = `
-${PROFILE_INFO.name.toUpperCase()}
-${PROFILE_INFO.roleTitle} | ${PROFILE_INFO.location}
-Email: ${PROFILE_INFO.email} | Phone: ${PROFILE_INFO.phone} | GitHub: ${PROFILE_INFO.github}
+${BASE_PROFILE.name.toUpperCase()}
+${profileInfo.roleTitle} | ${BASE_PROFILE.location}
+Email: ${BASE_PROFILE.email} | Phone: ${BASE_PROFILE.phone} | GitHub: ${BASE_PROFILE.github}
 
 SUMMARY
-${PROFILE_INFO.bioDetailed}
+${profileInfo.bioDetailed}
 
 PROFESSIONAL EXPERIENCE
-${EXPERIENCES.map(
+${experiences.map(
   (exp) => `
 ${exp.role} - ${exp.company} (${exp.year})
 - ${exp.description}
@@ -36,10 +49,10 @@ Tech Stack: ${exp.techStack.join(', ')}
 ).join('\n')}
 
 ACADEMIC BACKGROUND
-${EDUCATION_ITEMS.map((edu) => `${edu.title} - ${edu.institution} (${edu.year})`).join('\n')}
+${educationItems.map((edu) => `${edu.title} - ${edu.institution} (${edu.year})`).join('\n')}
 
 CERTIFICATIONS
-${CERTIFICATION_ITEMS.map((cert) => `${cert.title} - ${cert.issuer} (${cert.year})`).join('\n')}
+${certificationItems.map((cert) => `${cert.title} - ${cert.issuer} (${cert.year})`).join('\n')}
     `.trim();
 
     navigator.clipboard.writeText(textCV);
@@ -62,7 +75,7 @@ ${CERTIFICATION_ITEMS.map((cert) => `${cert.title} - ${cert.issuer} (${cert.year
         <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-black/10 print:hidden">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#3525cd]">
             <FileText className="w-4 h-4" />
-            <span>Digital Curriculum Vitae (PDF / Print View)</span>
+            <span>{t('exportTitle')}</span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -71,14 +84,14 @@ ${CERTIFICATION_ITEMS.map((cert) => `${cert.title} - ${cert.issuer} (${cert.year
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/5 hover:bg-black/10 text-xs font-semibold text-[#191c1d] transition-colors"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
-              <span>{copied ? 'Copied CV Text' : 'Copy Plaintext'}</span>
+              <span>{copied ? t('copiedMsg') : t('copyTextBtn')}</span>
             </button>
             <button
               onClick={handlePrint}
               className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#3525cd] hover:bg-[#271ab1] text-white text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm"
             >
               <Printer className="w-3.5 h-3.5" />
-              <span>Print / Save PDF</span>
+              <span>{t('printPdfBtn')}</span>
             </button>
           </div>
         </div>
@@ -88,35 +101,35 @@ ${CERTIFICATION_ITEMS.map((cert) => `${cert.title} - ${cert.issuer} (${cert.year
           {/* Header */}
           <div className="border-b pb-6 border-black/10 space-y-2">
             <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight">
-              {PROFILE_INFO.name}
+              {BASE_PROFILE.name}
             </h1>
             <p className="text-xs font-mono font-bold uppercase tracking-widest text-[#3525cd]">
-              {PROFILE_INFO.roleTitle}
+              {profileInfo.roleTitle}
             </p>
             <div className="flex flex-wrap gap-4 text-xs text-[#545f73] font-mono pt-1">
-              <span>LOCATION: {PROFILE_INFO.location}</span>
-              <span>EMAIL: {PROFILE_INFO.email}</span>
-              <span>PHONE: {PROFILE_INFO.phone}</span>
-              <span>GITHUB: {PROFILE_INFO.github}</span>
+              <span>LOCATION: {BASE_PROFILE.location}</span>
+              <span>EMAIL: {BASE_PROFILE.email}</span>
+              <span>PHONE: {BASE_PROFILE.phone}</span>
+              <span>GITHUB: {BASE_PROFILE.github}</span>
             </div>
           </div>
 
           {/* Executive Summary */}
           <div className="space-y-2">
             <h2 className="text-xs font-bold uppercase tracking-widest text-[#545f73] font-mono">
-              Executive Summary
+              Resumen / Executive Summary
             </h2>
             <p className="text-xs sm:text-sm text-[#191c1d] leading-relaxed">
-              {PROFILE_INFO.bioDetailed}
+              {profileInfo.bioDetailed}
             </p>
           </div>
 
           {/* Professional Experience */}
           <div className="space-y-4">
             <h2 className="text-xs font-bold uppercase tracking-widest text-[#545f73] font-mono border-b pb-1 border-black/10">
-              Professional Experience
+              {t('experienceHeader')}
             </h2>
-            {EXPERIENCES.map((exp) => (
+            {experiences.map((exp) => (
               <div key={exp.id} className="space-y-1.5">
                 <div className="flex justify-between items-baseline text-xs sm:text-sm">
                   <span className="font-bold text-[#191c1d]">
@@ -141,9 +154,9 @@ ${CERTIFICATION_ITEMS.map((cert) => `${cert.title} - ${cert.issuer} (${cert.year
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
             <div className="space-y-2">
               <h2 className="text-xs font-bold uppercase tracking-widest text-[#545f73] font-mono border-b pb-1 border-black/10">
-                Education
+                {t('educationHeader')}
               </h2>
-              {EDUCATION_ITEMS.map((edu, idx) => (
+              {educationItems.map((edu, idx) => (
                 <div key={idx} className="text-xs">
                   <div className="font-bold text-[#191c1d]">{edu.title}</div>
                   <div className="text-[#545f73]">{edu.institution} • {edu.year}</div>
@@ -153,9 +166,9 @@ ${CERTIFICATION_ITEMS.map((cert) => `${cert.title} - ${cert.issuer} (${cert.year
 
             <div className="space-y-2">
               <h2 className="text-xs font-bold uppercase tracking-widest text-[#545f73] font-mono border-b pb-1 border-black/10">
-                Certifications
+                {t('certificationsHeader')}
               </h2>
-              {CERTIFICATION_ITEMS.map((cert, idx) => (
+              {certificationItems.map((cert, idx) => (
                 <div key={idx} className="text-xs">
                   <div className="font-bold text-[#191c1d]">{cert.title}</div>
                   <div className="text-[#545f73]">{cert.issuer} • {cert.year}</div>

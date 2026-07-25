@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ActiveTab, SkillCategory } from './types';
-import { EXPERIENCES } from './data';
+import { getExperiences } from './data';
+import { useLanguage } from './LanguageContext';
 import { Navigation } from './components/Navigation';
 import { ExpertiseView } from './components/ExpertiseView';
 import { DigitalCVView } from './components/DigitalCVView';
@@ -12,13 +13,15 @@ import { CVExportModal } from './components/CVExportModal';
 import { Footer } from './components/Footer';
 
 export default function App() {
+  const { lang } = useLanguage();
   const [activeTab, setActiveTab] = useState<ActiveTab>('expertise');
   const [selectedSkill, setSelectedSkill] = useState<SkillCategory | null>(null);
   const [selectedExperienceId, setSelectedExperienceId] = useState<string | null>(null);
   const [isConnectOpen, setIsConnectOpen] = useState<boolean>(false);
   const [isCVExportOpen, setIsCVExportOpen] = useState<boolean>(false);
 
-  const selectedExperience = EXPERIENCES.find((exp) => exp.id === selectedExperienceId) || null;
+  const experiences = getExperiences(lang);
+  const selectedExperience = experiences.find((exp) => exp.id === selectedExperienceId) || null;
 
   return (
     <div className="min-h-screen flex flex-col justify-between relative bg-[#f8f9fa] text-[#191c1d]">
@@ -93,4 +96,3 @@ export default function App() {
     </div>
   );
 }
-

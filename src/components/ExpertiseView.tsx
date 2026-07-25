@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import {
-  PROFILE_INFO,
-  CORE_COMPETENCIES,
-  STRATEGIC_IMPACT,
-  SKILL_CATEGORIES,
-  EDUCATION_ITEMS,
-  CERTIFICATION_ITEMS,
-  BENTO_ITEMS,
+  getProfileInfo,
+  getCoreCompetencies,
+  getStrategicImpact,
+  getSkillCategories,
+  getEducation,
+  getCertifications,
+  getBentoItems,
+  BASE_PROFILE,
 } from '../data';
+import { useLanguage } from '../LanguageContext';
 import { SkillCategory } from '../types';
-import { Sparkles, ArrowUpRight, CheckCircle2, Award, Terminal, Code2, ShieldCheck, ChevronRight, MapPin } from 'lucide-react';
+import { Sparkles, ArrowUpRight, CheckCircle2, Award, Code2, ShieldCheck, ChevronRight, MapPin } from 'lucide-react';
 
 interface ExpertiseViewProps {
   onSelectSkill: (skill: SkillCategory) => void;
@@ -22,6 +24,15 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
   onOpenConnect,
   onNavigateToExperience,
 }) => {
+  const { lang, t } = useLanguage();
+  const profileInfo = getProfileInfo(lang);
+  const coreCompetencies = getCoreCompetencies(lang);
+  const strategicImpact = getStrategicImpact(lang);
+  const skillCategories = getSkillCategories(lang);
+  const educationItems = getEducation(lang);
+  const certificationItems = getCertifications(lang);
+  const bentoItems = getBentoItems(lang);
+
   const [selectedTagFilter, setSelectedTagFilter] = useState<string | null>(null);
 
   return (
@@ -39,31 +50,31 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
           </div>
           <div className="pointer-events-auto absolute top-12 right-12 float-slow [animation-delay:1.5s] shadow-sm bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-black/5 text-xs font-semibold text-[#191c1d] flex items-center gap-1.5 hover:scale-105 transition-transform cursor-pointer">
             <span className="w-2 h-2 rounded-full bg-sky-500" />
-            React 19 & Next.js
+            Angular 18 & React 19
           </div>
           <div className="pointer-events-auto absolute bottom-16 left-12 float-slow [animation-delay:3s] shadow-sm bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-black/5 text-xs font-semibold text-[#545f73] flex items-center gap-1.5 hover:scale-105 transition-transform cursor-pointer">
             <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            Node.js & Express
+            Java Spring Boot & Node.js
           </div>
           <div className="pointer-events-auto absolute bottom-20 right-16 float-slow [animation-delay:2s] shadow-sm bg-white/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-black/5 text-xs font-semibold text-[#7e3000] flex items-center gap-1.5 hover:scale-105 transition-transform cursor-pointer">
             <span className="w-2 h-2 rounded-full bg-amber-500" />
-            Tailwind CSS v4
+            Copilot CLI & SDD
           </div>
         </div>
 
         {/* Eyebrow badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/5 border border-black/5 text-xs font-semibold tracking-wider text-[#545f73] uppercase mb-6">
           <Sparkles className="w-3.5 h-3.5 text-[#3525cd]" />
-          <span>Technical Skills & Architecture</span>
+          <span>{profileInfo.roleTitle}</span>
         </div>
 
         {/* Main Display Headline */}
-        <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal tracking-tight text-[#191c1d] max-w-4xl leading-[1.1] mb-6">
-          A technical <em className="italic font-normal text-[#3525cd]">precision.</em>
+        <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight text-[#191c1d] max-w-4xl leading-[1.15] mb-6 px-4">
+          {profileInfo.tagline}
         </h1>
 
         <p className="text-base sm:text-lg text-[#545f73] max-w-2xl mx-auto leading-relaxed px-4 font-light">
-          {PROFILE_INFO.bioShort}
+          {profileInfo.bioShort}
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -71,14 +82,14 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
             onClick={onNavigateToExperience}
             className="group flex items-center gap-2 px-6 py-3 rounded-full bg-[#3525cd] hover:bg-[#271ab1] text-white text-xs font-semibold tracking-wider uppercase transition-all shadow-md hover:shadow-lg hover:shadow-[#3525cd]/25 active:scale-95"
           >
-            <span>Explore Case Studies</span>
+            <span>{t('viewPathBtn')}</span>
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </button>
           <button
             onClick={onOpenConnect}
             className="flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-black/5 text-[#191c1d] text-xs font-semibold tracking-wider uppercase transition-all border border-black/10"
           >
-            <span>Get In Touch</span>
+            <span>{t('contactMeBtn')}</span>
           </button>
         </div>
       </section>
@@ -94,10 +105,10 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
             <div>
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#3525cd] mb-4">
                 <Code2 className="w-4 h-4" />
-                <span>Core Competencies</span>
+                <span>{t('coreCompetenciesHeader')}</span>
               </div>
               <ul className="space-y-3">
-                {CORE_COMPETENCIES.map((comp, idx) => (
+                {coreCompetencies.map((comp, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-sm text-[#191c1d] group">
                     <CheckCircle2 className="w-4 h-4 text-[#3525cd] shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                     <span className="font-medium">{comp}</span>
@@ -110,10 +121,10 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
             <div>
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#7e3000] mb-4">
                 <ShieldCheck className="w-4 h-4" />
-                <span>Strategic Impact</span>
+                <span>{t('strategicImpactHeader')}</span>
               </div>
               <ul className="space-y-3">
-                {STRATEGIC_IMPACT.map((imp, idx) => (
+                {strategicImpact.map((imp, idx) => (
                   <li key={idx} className="flex items-start gap-3 text-sm text-[#191c1d] group">
                     <CheckCircle2 className="w-4 h-4 text-[#7e3000] shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                     <span className="font-medium">{imp}</span>
@@ -137,7 +148,7 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
               </span>
             </div>
             <span className="text-[#545f73] font-mono text-[11px]">
-              LOCATION: CARTAGENA, COLOMBIA • REMOTE-READY
+              LOCATION: {BASE_PROFILE.location.toUpperCase()} • REMOTE-READY
             </span>
           </div>
         </div>
@@ -148,10 +159,10 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
             <h2 className="font-serif text-2xl sm:text-3xl text-[#191c1d]">
-              Deep Tech Stack Mastery
+              {t('skillsGridHeader')}
             </h2>
             <p className="text-xs text-[#545f73] uppercase tracking-wider font-semibold mt-1">
-              Production-tested frameworks & architecture patterns
+              {t('clickToInspect')}
             </p>
           </div>
           {selectedTagFilter && (
@@ -165,7 +176,7 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {SKILL_CATEGORIES.map((cat) => (
+          {skillCategories.map((cat) => (
             <div
               key={cat.id}
               onClick={() => onSelectSkill(cat)}
@@ -195,7 +206,7 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
               {/* Progress bar */}
               <div className="space-y-1.5 mb-5">
                 <div className="flex justify-between text-[11px] font-mono text-[#545f73]">
-                  <span>Proficiency</span>
+                  <span>{t('levelLabel')}</span>
                   <span className="font-bold text-[#191c1d]">{cat.percentage}%</span>
                 </div>
                 <div className="w-full h-2 bg-black/5 rounded-full overflow-hidden">
@@ -227,7 +238,7 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
               </div>
 
               <div className="mt-4 pt-3 border-t border-black/5 flex items-center justify-between text-xs font-semibold text-[#3525cd] opacity-0 group-hover:opacity-100 transition-opacity">
-                <span>View Full Skill Breakdown</span>
+                <span>{t('clickToInspect')}</span>
                 <ChevronRight className="w-4 h-4" />
               </div>
             </div>
@@ -242,10 +253,10 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
           <div>
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#545f73] mb-6">
               <Award className="w-4 h-4 text-[#3525cd]" />
-              <span>Academic Background</span>
+              <span>{t('educationHeader')}</span>
             </div>
             <div className="space-y-6 relative border-l-2 border-black/10 pl-6 ml-2">
-              {EDUCATION_ITEMS.map((edu, idx) => (
+              {educationItems.map((edu, idx) => (
                 <div key={idx} className="relative group">
                   <div className="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-white border-2 border-[#3525cd] group-hover:scale-125 transition-transform" />
                   <span className="text-[11px] font-mono text-[#3525cd] font-semibold">
@@ -267,10 +278,10 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
           <div>
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#545f73] mb-6">
               <Award className="w-4 h-4 text-[#7e3000]" />
-              <span>Professional Certifications</span>
+              <span>{t('certificationsHeader')}</span>
             </div>
             <div className="space-y-3">
-              {CERTIFICATION_ITEMS.map((cert, idx) => (
+              {certificationItems.map((cert, idx) => (
                 <div
                   key={idx}
                   className="p-4 rounded-xl bg-white border border-black/5 hover:border-black/15 shadow-sm flex items-center justify-between gap-4 transition-all"
@@ -300,109 +311,74 @@ export const ExpertiseView: React.FC<ExpertiseViewProps> = ({
       <section className="max-w-4xl mx-auto px-4 py-8 text-center">
         <div className="relative p-8 sm:p-12 rounded-3xl bg-gradient-to-r from-[#e2dfff]/30 via-white to-[#d5e0f8]/30 border border-black/5">
           <p className="font-serif italic text-xl sm:text-2xl md:text-3xl text-[#191c1d] leading-relaxed">
-            "{PROFILE_INFO.techQuote}"
+            "{profileInfo.techQuote}"
           </p>
           <span className="block mt-4 text-xs font-mono uppercase tracking-widest text-[#545f73]">
-            — Jeiman Cabarcas • Senior AI & Software Engineer
+            — {BASE_PROFILE.name} • {profileInfo.roleTitle}
           </span>
         </div>
       </section>
 
-      {/* QUANTIFIABLE RESULTS / PERFORMANCE PHILOSOPHY BENTO GRID */}
+      {/* QUANTIFIABLE RESULTS / BENTO GRID */}
       <section className="max-w-5xl mx-auto px-4">
         <div className="mb-8 text-center">
           <h2 className="font-serif text-2xl sm:text-3xl text-[#191c1d]">
-            Performance Philosophy
+            {t('bentoHeader')}
           </h2>
-          <p className="text-xs text-[#545f73] uppercase tracking-wider font-semibold mt-1">
-            Quantifiable results driven by intentional engineering
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card 1: Data-Driven Development */}
-          <div className="md:col-span-2 glass-card bg-white p-6 sm:p-8 rounded-2xl border border-black/5 shadow-sm flex flex-col justify-between">
-            <div>
-              <div className="w-10 h-10 rounded-xl bg-[#3525cd]/10 text-[#3525cd] flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined">insights</span>
-              </div>
-              <h3 className="font-bold text-lg text-[#191c1d] mb-2">
-                Spec-Driven & Clean Architecture
-              </h3>
-              <p className="text-sm text-[#545f73] leading-relaxed">
-                Utilizing SOLID principles, spec-driven development (SDD), and automated testing pipelines to ensure scalable, maintainable enterprise systems.
-              </p>
+          {bentoItems.map((item) => (
+            <div
+              key={item.id}
+              className={`${item.spanCol} ${item.bgClass} p-6 sm:p-8 rounded-2xl shadow-sm flex flex-col justify-between`}
+            >
+              {item.id === 'location-cartagena' ? (
+                <>
+                  <img
+                    src={BASE_PROFILE.labImageUrl}
+                    alt="Cartagena Engineering Base"
+                    referrerPolicy="no-referrer"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 sm:p-8 flex flex-col justify-end text-white">
+                    <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-white/80 mb-1">
+                      <MapPin className="w-3.5 h-3.5 text-sky-400" />
+                      <span>{item.subtitle || 'LOCATION'}</span>
+                    </div>
+                    <h3 className="font-serif text-xl sm:text-2xl font-bold mb-1">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-white/80 max-w-lg">
+                      {item.description}
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-black/5 text-[#3525cd] flex items-center justify-center mb-4">
+                    <span className="material-symbols-outlined">{item.icon}</span>
+                  </div>
+                  {item.highlightNumber && (
+                    <span className="font-serif text-4xl sm:text-5xl font-bold tracking-tight block mb-1">
+                      {item.highlightNumber}
+                    </span>
+                  )}
+                  {item.highlightText && (
+                    <p className="text-xs uppercase tracking-widest text-[#3525cd] font-mono font-semibold mb-2">
+                      {item.highlightText}
+                    </p>
+                  )}
+                  <h3 className="font-bold text-base text-[#191c1d] mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#545f73] leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              )}
             </div>
-            <div className="mt-6 pt-4 border-t border-black/5 flex items-center gap-6 text-xs text-[#545f73] font-mono">
-              <div>
-                <span className="block text-lg font-bold text-[#3525cd] font-sans">100%</span>
-                <span>SOLID Principles</span>
-              </div>
-              <div className="h-6 w-px bg-black/10" />
-              <div>
-                <span className="block text-lg font-bold text-[#191c1d] font-sans">99.9%</span>
-                <span>Uptime & Quality</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2: Lighthouse 100 */}
-          <div className="bg-[#3525cd] text-white p-6 sm:p-8 rounded-2xl shadow-md flex flex-col justify-between">
-            <div>
-              <div className="w-10 h-10 rounded-xl bg-white/20 text-white flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined">speed</span>
-              </div>
-              <span className="font-serif text-5xl font-bold tracking-tight block mb-1">
-                100%
-              </span>
-              <p className="text-xs uppercase tracking-widest text-white/80 font-mono font-semibold mb-3">
-                SDD Compliance
-              </p>
-              <p className="text-xs text-white/80 leading-relaxed">
-                Uncompromising standard for clean code, token optimization, and zero architectural debt.
-              </p>
-            </div>
-          </div>
-
-          {/* Card 3: CLI Tooling */}
-          <div className="bg-[#f3f4f5] p-6 sm:p-8 rounded-2xl border border-black/5 shadow-sm flex flex-col justify-between">
-            <div>
-              <div className="w-10 h-10 rounded-xl bg-black/10 text-[#191c1d] flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined">terminal</span>
-              </div>
-              <h3 className="font-bold text-base text-[#191c1d] mb-2">
-                Agentic AI & CLI Workflows
-              </h3>
-              <p className="text-xs text-[#545f73] leading-relaxed">
-                Integrating Copilot CLI, Claude Code, and OpenCode tools into high-velocity production pipelines.
-              </p>
-            </div>
-            <div className="mt-4 text-[10px] font-mono bg-black/5 p-2 rounded text-[#545f73]">
-              $ npx jeiman-cli init --sdd=true
-            </div>
-          </div>
-
-          {/* Card 4: Cartagena Workspace */}
-          <div className="md:col-span-2 relative overflow-hidden rounded-2xl group min-h-[220px] shadow-sm">
-            <img
-              src={PROFILE_INFO.labImageUrl}
-              alt="Cartagena Engineering Workspace"
-              referrerPolicy="no-referrer"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 sm:p-8 flex flex-col justify-end text-white">
-              <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-white/80 mb-1">
-                <MapPin className="w-3.5 h-3.5 text-sky-400" />
-                <span>Cartagena, Colombia • Global Reach</span>
-              </div>
-              <h3 className="font-serif text-xl sm:text-2xl font-bold mb-1">
-                Engineering Base
-              </h3>
-              <p className="text-xs text-white/80 max-w-lg">
-                Operating from Cartagena, Bolívar, Colombia while collaborating with global software teams and enterprise client products at Globant.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
     </div>
