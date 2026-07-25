@@ -20,7 +20,7 @@ export const CVExportModal: React.FC<CVExportModalProps> = ({ isOpen, onClose })
     const textCV = `
 ${PROFILE_INFO.name.toUpperCase()}
 ${PROFILE_INFO.roleTitle} | ${PROFILE_INFO.location}
-Email: ${PROFILE_INFO.email} | Portfolio: https://aesthete.dev
+Email: ${PROFILE_INFO.email} | Phone: ${PROFILE_INFO.phone} | GitHub: ${PROFILE_INFO.github}
 
 SUMMARY
 ${PROFILE_INFO.bioDetailed}
@@ -96,7 +96,8 @@ ${CERTIFICATION_ITEMS.map((cert) => `${cert.title} - ${cert.issuer} (${cert.year
             <div className="flex flex-wrap gap-4 text-xs text-[#545f73] font-mono pt-1">
               <span>LOCATION: {PROFILE_INFO.location}</span>
               <span>EMAIL: {PROFILE_INFO.email}</span>
-              <span>PORTFOLIO: https://aesthete.dev</span>
+              <span>PHONE: {PROFILE_INFO.phone}</span>
+              <span>GITHUB: {PROFILE_INFO.github}</span>
             </div>
           </div>
 

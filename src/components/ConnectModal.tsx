@@ -8,7 +8,7 @@ interface ConnectModalProps {
 }
 
 export const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) => {
-  const [topic, setTopic] = useState<string>('Fractional Architect');
+  const [topic, setTopic] = useState<string>('Agentic AI & SDD');
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [message, setMessage] = useState<string>('');
@@ -30,10 +30,10 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) =
   };
 
   const topics = [
-    'Fractional Architect',
-    'Design System Build',
-    'Full-Stack Project',
-    'Technical Advisory',
+    'Agentic AI & SDD',
+    'Enterprise Frontend (Angular/React)',
+    'Backend & Microservices',
+    'Software Architecture',
     'General Inquiry',
   ];
 
@@ -57,7 +57,7 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) =
               Message Received
             </h3>
             <p className="text-sm text-[#545f73] max-w-sm mx-auto">
-              Thank you for getting in touch. Alex will review your inquiry regarding{' '}
+              Thank you for getting in touch. {PROFILE_INFO.name} will review your inquiry regarding{' '}
               <strong className="text-[#3525cd]">{topic}</strong> and respond shortly.
             </p>
           </div>
@@ -70,10 +70,10 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) =
                 <span>Start A Conversation</span>
               </div>
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#191c1d]">
-                Connect with Alex Rivers
+                Connect with {PROFILE_INFO.name}
               </h2>
               <p className="text-xs text-[#545f73] mt-1">
-                Direct inquiry line for technical architecture & leadership consulting.
+                Direct inquiry line for AI Engineering, SDD Workflows & Fullstack Software Architecture.
               </p>
             </div>
 
@@ -85,7 +85,7 @@ export const ConnectModal: React.FC<ConnectModalProps> = ({ isOpen, onClose }) =
               </div>
               <div className="flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-[#7e3000]" />
-                <span>London, UK (GMT)</span>
+                <span>{PROFILE_INFO.location}</span>
               </div>
             </div>
 

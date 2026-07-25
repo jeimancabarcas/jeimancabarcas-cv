@@ -25,14 +25,14 @@ export const Navigation: React.FC<NavigationProps> = ({
           className="group flex items-center gap-2.5 text-left focus:outline-none"
         >
           <div className="w-8 h-8 rounded-full bg-[#3525cd] text-white flex items-center justify-center font-serif text-sm font-bold shadow-md shadow-[#3525cd]/20 transition-transform group-hover:scale-105">
-            A
+            {PROFILE_INFO.name.charAt(0)}
           </div>
           <div>
             <span className="font-serif text-lg font-bold tracking-tight text-[#191c1d] group-hover:text-[#3525cd] transition-colors">
               {activeTab === 'cv' ? PROFILE_INFO.name : PROFILE_INFO.brandName}
             </span>
             <span className="hidden sm:inline-block text-[10px] uppercase tracking-widest text-[#545f73] ml-2 px-1.5 py-0.5 rounded bg-black/5 font-semibold">
-              London, UK
+              {PROFILE_INFO.location}
             </span>
           </div>
         </button>
