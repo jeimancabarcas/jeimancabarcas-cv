@@ -17,8 +17,7 @@ export const BASE_PROFILE = {
   github: 'https://github.com/jeimancabarcas',
   linkedin: 'https://www.linkedin.com/in/jeimancabarcas',
   readcv: 'https://github.com/jeimancabarcas',
-  avatarUrl:
-    'https://lh3.googleusercontent.com/aida-public/AB6AXuD_B4SUy-NuU840kmAUdhoVTRP1zj8Uu9z25nWHNRopyCp-qlg3smoeFIr428ynZw_SF3Sah_FB-JwQMa5q5ptKBUC5PWyJ6KnXgn5Mm-eBOjr6Lzkk9ml3sbHmA8GFwi9FpvRcmsDVIU4eZjv-8CsDpQOW6-MevpFn4-EeIU3RjlsKfhzIy7U4NrRctkHgPBxIR2kR7lA0L5_yrzCnKZwIaMZn_EKr2X8Mu4VQnRXVTVnFBUO4UrlxWa-sEFTGl9WZwSX6DpTPOMtF',
+  avatarUrl: '/pp.jpg',
   labImageUrl:
     'https://lh3.googleusercontent.com/aida-public/AB6AXuAfT94pKdcrNPGezgjUxT62YUzVKMkyLOqI3TSJ-RFIZlySgJRWEZWKHDH216hYj0lT8M_gBYgLWjs1mZ7M85tKIuRSb0dpCCs5N7KU9VtG4vYp26GBU4BITeEdj7AGsgQBtjjBnkCr4VtkZ_yhrgxwuISp6X2_PnP1qtrfTkIsDu-lckDSrN0ivgcmVbYsogo3oM7Qdk71apbzbebH9-ucXp1_EsajhP3RteKmxRUvfTANZ3Cq6OrDoiCGuG0tVEc5kXz2XdlwCnXp',
 };

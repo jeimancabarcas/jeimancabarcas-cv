@@ -2,7 +2,7 @@ import React from 'react';
 import { ActiveTab } from '../types';
 import { BASE_PROFILE } from '../data';
 import { useLanguage } from '../LanguageContext';
-import { Download, Mail, Layers, UserCheck, Briefcase, MapPin, Sparkles } from 'lucide-react';
+import { Download, Mail, Layers, UserCheck, Briefcase, MapPin } from 'lucide-react';
 
 interface NavigationProps {
   activeTab: ActiveTab;
@@ -21,8 +21,8 @@ export const Navigation: React.FC<NavigationProps> = ({
 
   return (
     <div className="w-full">
-      {/* 1. TOP STATIC UTILITY BAR (Sticky at absolute top-0) */}
-      <div className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-black/10 py-1.5 px-3 sm:px-6 text-xs transition-all shadow-xs">
+      {/* 1. TOP UTILITY BAR (Scrolls with page flow, hides on scroll) */}
+      <div className="w-full bg-white/60 backdrop-blur-md border-b border-black/5 py-1.5 px-3 sm:px-6 text-xs transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
           {/* Left: Location & Availability */}
           <div className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
@@ -85,9 +85,9 @@ export const Navigation: React.FC<NavigationProps> = ({
         </div>
       </div>
 
-      {/* 2. MAIN FLOATING NAVIGATION HEADER */}
-      <header className="sticky top-[34px] sm:top-[37px] z-40 px-3 sm:px-6 max-w-7xl mx-auto my-2.5 sm:my-4">
-        <div className="glass-card bg-white/90 backdrop-blur-xl rounded-2xl border border-black/10 shadow-sm px-3.5 sm:px-6 py-2.5 sm:py-3 transition-all duration-300 flex items-center justify-between gap-3 overflow-hidden">
+      {/* 2. FLOATING STICKY MAIN NAVBAR WITH BORDERS */}
+      <header className="sticky top-3 z-50 px-3 sm:px-6 max-w-7xl mx-auto my-2.5 sm:my-3">
+        <div className="glass-card bg-white/90 backdrop-blur-xl rounded-2xl border border-black/10 shadow-md px-3.5 sm:px-6 py-2.5 sm:py-3 transition-all duration-300 flex items-center justify-between gap-3 overflow-hidden">
           {/* Brand Logo / Name */}
           <button
             onClick={() => setActiveTab('expertise')}
