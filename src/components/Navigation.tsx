@@ -2,7 +2,7 @@ import React from 'react';
 import { ActiveTab } from '../types';
 import { BASE_PROFILE } from '../data';
 import { useLanguage } from '../LanguageContext';
-import { Download, Mail, Layers, UserCheck, Briefcase, Globe } from 'lucide-react';
+import { Download, Mail, Layers, UserCheck, Briefcase, MapPin, Sparkles } from 'lucide-react';
 
 interface NavigationProps {
   activeTab: ActiveTab;
@@ -20,136 +20,132 @@ export const Navigation: React.FC<NavigationProps> = ({
   const { lang, setLang, t } = useLanguage();
 
   return (
-    <header className="sticky top-4 z-40 px-4 max-w-7xl mx-auto mb-8 sm:mb-12">
-      <div className="glass-card bg-white/80 backdrop-blur-md rounded-2xl border border-black/5 shadow-sm px-4 sm:px-6 py-3 transition-all duration-300 flex items-center justify-between gap-4">
-        {/* Brand Name */}
-        <button
-          onClick={() => setActiveTab('expertise')}
-          className="group flex items-center gap-2.5 text-left focus:outline-none"
-        >
-          <div>
-            <span className="font-serif text-lg font-bold tracking-tight text-[#191c1d] group-hover:text-[#3525cd] transition-colors">
-              {BASE_PROFILE.brandName}
-            </span>
-            <span className="hidden sm:inline-block text-[10px] uppercase tracking-widest text-[#545f73] ml-2 px-1.5 py-0.5 rounded bg-black/5 font-semibold">
-              {BASE_PROFILE.location}
-            </span>
-          </div>
-        </button>
-
-        {/* Primary Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 bg-[#f3f4f5] p-1.5 rounded-full border border-black/5">
-          <button
-            onClick={() => setActiveTab('expertise')}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 ${
-              activeTab === 'expertise'
-                ? 'bg-white text-[#3525cd] shadow-sm'
-                : 'text-[#545f73] hover:text-[#191c1d] hover:bg-white/50'
-            }`}
-          >
-            <Layers className="w-3.5 h-3.5" />
-            <span>{t('navExpertise')}</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('cv')}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 ${
-              activeTab === 'cv'
-                ? 'bg-white text-[#3525cd] shadow-sm'
-                : 'text-[#545f73] hover:text-[#191c1d] hover:bg-white/50'
-            }`}
-          >
-            <UserCheck className="w-3.5 h-3.5" />
-            <span>{t('navCV')}</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('experience')}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 ${
-              activeTab === 'experience'
-                ? 'bg-white text-[#3525cd] shadow-sm'
-                : 'text-[#545f73] hover:text-[#191c1d] hover:bg-white/50'
-            }`}
-          >
-            <Briefcase className="w-3.5 h-3.5" />
-            <span>{t('navExperience')}</span>
-          </button>
-        </nav>
-
-        {/* Action Buttons & Language Switcher */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Language Switcher */}
-          <div className="flex items-center bg-black/5 p-1 rounded-full text-xs border border-black/5">
-            <button
-              onClick={() => setLang('es')}
-              className={`px-2.5 py-1 rounded-full font-bold text-[11px] transition-all ${
-                lang === 'es'
-                  ? 'bg-[#3525cd] text-white shadow-xs'
-                  : 'text-[#545f73] hover:text-[#191c1d]'
-              }`}
-            >
-              ES
-            </button>
-            <button
-              onClick={() => setLang('en')}
-              className={`px-2.5 py-1 rounded-full font-bold text-[11px] transition-all ${
-                lang === 'en'
-                  ? 'bg-[#3525cd] text-white shadow-xs'
-                  : 'text-[#545f73] hover:text-[#191c1d]'
-              }`}
-            >
-              EN
-            </button>
+    <div className="w-full">
+      {/* 1. TOP STATIC UTILITY BAR (Sticky at absolute top-0) */}
+      <div className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-black/10 py-1.5 px-3 sm:px-6 text-xs transition-all shadow-xs">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+          {/* Left: Location & Availability */}
+          <div className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
+            <div className="flex items-center gap-1 text-[#191c1d] font-semibold text-[11px]">
+              <MapPin className="w-3.5 h-3.5 text-[#3525cd] shrink-0" />
+              <span>{BASE_PROFILE.location}</span>
+            </div>
+            <span className="hidden sm:inline-block text-black/20">•</span>
+            <div className="hidden sm:flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-mono font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Disponible para Proyectos & Liderazgo IA</span>
+            </div>
           </div>
 
-          <button
-            onClick={onOpenCVExport}
-            title="Export CV PDF / View Print Format"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#545f73] hover:text-[#191c1d] bg-black/5 hover:bg-black/10 rounded-full transition-colors"
-          >
-            <Download className="w-3.5 h-3.5" />
-            <span>{t('exportCVBtn')}</span>
-          </button>
+          {/* Right: Actions (Language Toggle, Export CV, Contact) */}
+          <div className="flex items-center gap-2 shrink-0">
+            {/* Language Switcher */}
+            <div className="flex items-center bg-[#f3f4f5] p-0.5 rounded-full text-[11px] border border-black/5">
+              <button
+                onClick={() => setLang('es')}
+                className={`px-2 py-0.5 rounded-full font-bold transition-all ${
+                  lang === 'es'
+                    ? 'bg-[#3525cd] text-white shadow-xs'
+                    : 'text-[#545f73] hover:text-[#191c1d]'
+                }`}
+              >
+                ES
+              </button>
+              <button
+                onClick={() => setLang('en')}
+                className={`px-2 py-0.5 rounded-full font-bold transition-all ${
+                  lang === 'en'
+                    ? 'bg-[#3525cd] text-white shadow-xs'
+                    : 'text-[#545f73] hover:text-[#191c1d]'
+                }`}
+              >
+                EN
+              </button>
+            </div>
 
-          <button
-            onClick={onOpenConnect}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#191c1d] hover:bg-[#3525cd] text-white text-xs font-semibold tracking-wider uppercase transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-[#3525cd]/20 active:scale-95"
-          >
-            <Mail className="w-3.5 h-3.5" />
-            <span>{t('connectBtn')}</span>
-          </button>
+            {/* Export CV Button */}
+            <button
+              onClick={onOpenCVExport}
+              title="Exportar CV PDF"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/5 hover:bg-black/10 text-[11px] font-medium text-[#191c1d] transition-colors"
+            >
+              <Download className="w-3 h-3 text-[#3525cd]" />
+              <span className="hidden xs:inline">{t('exportCVBtn')}</span>
+            </button>
+
+            {/* Direct Contact Button */}
+            <button
+              onClick={onOpenConnect}
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#191c1d] hover:bg-[#3525cd] text-white text-[11px] font-semibold tracking-wide transition-all shadow-xs active:scale-95"
+            >
+              <Mail className="w-3 h-3" />
+              <span>{t('connectBtn')}</span>
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Tab Navigation Sub-bar */}
-      <div className="flex md:hidden justify-center mt-2">
-        <div className="flex items-center gap-1 bg-white/90 backdrop-blur-md p-1 rounded-full border border-black/10 shadow-sm text-xs">
+      {/* 2. MAIN FLOATING NAVIGATION HEADER */}
+      <header className="sticky top-[34px] sm:top-[37px] z-40 px-3 sm:px-6 max-w-7xl mx-auto my-2.5 sm:my-4">
+        <div className="glass-card bg-white/90 backdrop-blur-xl rounded-2xl border border-black/10 shadow-sm px-3.5 sm:px-6 py-2.5 sm:py-3 transition-all duration-300 flex items-center justify-between gap-3 overflow-hidden">
+          {/* Brand Logo / Name */}
           <button
             onClick={() => setActiveTab('expertise')}
-            className={`px-3 py-1 rounded-full font-medium transition-colors ${
-              activeTab === 'expertise' ? 'bg-[#3525cd] text-white' : 'text-[#545f73]'
-            }`}
+            className="group flex items-center gap-2 text-left focus:outline-none shrink-0"
           >
-            {t('navExpertise')}
+            <div className="w-8 h-8 rounded-full bg-[#3525cd] text-white flex items-center justify-center font-serif font-bold text-sm shadow-sm group-hover:scale-105 transition-transform">
+              JC
+            </div>
+            <div>
+              <span className="font-serif text-base sm:text-lg font-bold tracking-tight text-[#191c1d] group-hover:text-[#3525cd] transition-colors leading-none block">
+                {BASE_PROFILE.brandName}
+              </span>
+              <span className="hidden lg:inline-block text-[10px] uppercase font-semibold text-[#545f73] tracking-wider mt-0.5">
+                MSc Software Architect
+              </span>
+            </div>
           </button>
-          <button
-            onClick={() => setActiveTab('cv')}
-            className={`px-3 py-1 rounded-full font-medium transition-colors ${
-              activeTab === 'cv' ? 'bg-[#3525cd] text-white' : 'text-[#545f73]'
-            }`}
-          >
-            {t('navCV')}
-          </button>
-          <button
-            onClick={() => setActiveTab('experience')}
-            className={`px-3 py-1 rounded-full font-medium transition-colors ${
-              activeTab === 'experience' ? 'bg-[#3525cd] text-white' : 'text-[#545f73]'
-            }`}
-          >
-            {t('navExperience')}
-          </button>
+
+          {/* Segmented Navigation Tabs */}
+          <nav className="flex items-center gap-1 bg-[#f3f4f5] p-1 rounded-full border border-black/5 overflow-x-auto no-scrollbar max-w-full">
+            <button
+              onClick={() => setActiveTab('expertise')}
+              className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide whitespace-nowrap transition-all duration-200 ${
+                activeTab === 'expertise'
+                  ? 'bg-white text-[#3525cd] shadow-sm'
+                  : 'text-[#545f73] hover:text-[#191c1d] hover:bg-white/50'
+              }`}
+            >
+              <Layers className="w-3.5 h-3.5 shrink-0" />
+              <span>{t('navExpertise')}</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('cv')}
+              className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide whitespace-nowrap transition-all duration-200 ${
+                activeTab === 'cv'
+                  ? 'bg-white text-[#3525cd] shadow-sm'
+                  : 'text-[#545f73] hover:text-[#191c1d] hover:bg-white/50'
+              }`}
+            >
+              <UserCheck className="w-3.5 h-3.5 shrink-0" />
+              <span>{t('navCV')}</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('experience')}
+              className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide whitespace-nowrap transition-all duration-200 ${
+                activeTab === 'experience'
+                  ? 'bg-white text-[#3525cd] shadow-sm'
+                  : 'text-[#545f73] hover:text-[#191c1d] hover:bg-white/50'
+              }`}
+            >
+              <Briefcase className="w-3.5 h-3.5 shrink-0" />
+              <span>{t('navExperience')}</span>
+            </button>
+          </nav>
         </div>
-      </div>
-    </header>
+      </header>
+    </div>
   );
 };

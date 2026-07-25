@@ -87,6 +87,14 @@
               radial-gradient(circle at 80% 70%, rgba(213, 224, 248, 0.45) 0%, transparent 50%);
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .blob-bg {
   position: absolute;
   width: 600px;
